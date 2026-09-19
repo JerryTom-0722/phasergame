@@ -9,8 +9,8 @@ import { Preloader } from './scenes/Preloader';
 //  https://docs.phaser.io/api-documentation/typedef/types-core#gameconfig
 const config: Phaser.Types.Core.GameConfig = {
     type: AUTO,
-    width: 1024,
-    height: 768,
+    width: window.innerWidth,
+    height: window.innerHeight,
     parent: 'game-container',
     backgroundColor: '#028af8',
     scene: [
@@ -23,9 +23,11 @@ const config: Phaser.Types.Core.GameConfig = {
 };
 
 const StartGame = (parent: string) => {
+    // 更新宽度和高度为当前窗口大小
+    config.width = window.innerWidth;
+    config.height = window.innerHeight;
 
     return new Game({ ...config, parent });
-
 }
 
 export default StartGame;

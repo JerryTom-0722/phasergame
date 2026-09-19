@@ -16,10 +16,17 @@ export class GameOver extends Scene
         this.camera = this.cameras.main
         this.camera.setBackgroundColor(0xff0000);
 
-        this.background = this.add.image(512, 384, 'background');
+        // 获取当前窗口尺寸
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        
+        // 设置背景图片填充整个屏幕
+        this.background = this.add.image(width/2, height/2, 'background');
         this.background.setAlpha(0.5);
+        this.background.setScale(Math.max(width / 1024, height / 768)); // 保持比例
 
-        this.gameover_text = this.add.text(512, 384, 'Game Over', {
+        // 设置游戏结束文本位置和样式
+        this.gameover_text = this.add.text(width/2, height/2, 'Game Over', {
             fontFamily: 'Arial Black', fontSize: 64, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
@@ -27,9 +34,7 @@ export class GameOver extends Scene
         this.gameover_text.setOrigin(0.5);
 
         this.input.once('pointerdown', () => {
-
             this.scene.start('MainMenu');
-
         });
     }
 }
